@@ -1,0 +1,2 @@
+<**/*.{byte,native,top,p.native}>: use_pcre
+<**/*.ml>: warn_Z, use_pcre

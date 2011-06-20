@@ -1,0 +1,49 @@
+# dinner 13200 (8)
+4.5 Quinoa-soup : 2 supp-gl : 2 supp-ham : 6 cookie
+3 TIKKA-MASALA : 3 popcorn
+5 Coconut-curry-w-rice : 8 sweet-buckwheat
+6 RISOTTO : 6 cookie
+6 Tortilla-soup : 20 cornbread : 4 supp-ham : 4 supp-gl
+5 Polenta : 3 popcorn
+3 BURRITOS : 4 brownie
+9 kitchadi : 6 cookie : 2 supp-ham
+# dinner 15600 (7)
+5 PALAK_PANEER
+5 Bryans-tomato-pasta : 1 sweetened-condensed-millet : 4 supp-ham : 4 supp-gl
+6.5 GRILLED_CHEESE_AND_TOMATO_SOUP : 2 supp-ham : 2 indian-bread-pudding
+6.5 Tortilla-soup : 22 cornbread : 4 supp-ham : 4 supp-gl
+5 Polenta : 1 indian-bread-pudding
+8 lentil-tomato-soup : 3.5 supp-bb : 16 supp-pita
+5 Bryans-cheesy-pasta : 12 cookie
+# dinner 14400 (10)
+4.5 Quinoa-soup : 2 supp-ham : 1 sweetened-condensed-millet 
+3 FETTUCINE_ALFREDO : 2.5 supp-ham
+8 kitchadi : 6 cookie
+4 clam-chowder : 16 cornbread
+6.5 lentil-tomato-soup : 4 supp-bb : 16 supp-pita
+3 BURRITOS : 5 brownie : 3 supp-ham : 2 supp-gl
+5.5 Bryans-cheesy-pasta : 7 cookie
+5.5 Veggie-Chili : 5 supp-bb : 3 popcorn
+6.5 Tortellinis : 3 coleslaw
+8.5 lentil-ginger-soup : 16 supp-pita
+# breakfast 11000 (8)
+27 bagel-breakfast
+23 seven-grain-hot-cereal
+12 Creamed-Eggs
+11.5 Cheesy-spicy-grits
+19 EGGS-IN-A-NEST
+11 oatmeal-breakfast
+# breakfast 13000 (7)
+8 Eggs-a-la-Tazah
+26 seven-grain-hot-cereal
+30 EGG-MCBAGELS
+13 oatmeal-breakfast
+25 seven-grain-hot-cereal
+# breakfast 12000 (10)
+22.5 seven-grain-hot-cereal
+30 bagel-breakfast
+13 Creamed-Eggs
+13 Cheesy-spicy-grits
+13 Cheesy-spicy-grits
+30 EGG-MCBAGELS
+4 BAKING-POWDER-BISCUITS

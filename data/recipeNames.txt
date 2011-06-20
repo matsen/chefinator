@@ -1,0 +1,27 @@
+1 Eggs-a-la-Tazah
+1 7-grain-hot-cereal
+1 Creamed-Eggs
+1 Cheesy-spicy-grits
+1 EGGS-IN-A-NEST
+1 EGG-MCBAGELS
+1 BAKING-POWDER-BISCUITS
+1 oatmeal-breakfast
+1 bagel-breakfast
+
+1 egg-salad-sandwich
+1 sweetened-condensed-millet
+1 sweet-bulgur
+1 popcorn
+
+1 GRILLED_CHEESE_AND_TOMATO_SOUP
+1 BURRITOS
+1 RISOTTO
+1 PALAK_PANEER
+1 TIKKA-MASALA
+1 indian-bread-pudding
+1 coleslaw
+1 lentil-tomato-soup
+1 lentil-ginger-soup
+1 clam-chowder
+1 kitchadi
+1 Quinoa-soup

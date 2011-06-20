@@ -1,0 +1,34 @@
+
+# breakfast 11000 (8)
+23 bagel-breakfast
+6 Eggs-a-la-Tazah
+22 seven-grain-hot-cereal
+12 Creamed-Eggs
+9 Cheesy-spicy-grits
+19 EGGS-IN-A-NEST
+13 EGG-MCBAGELS
+4 BAKING-POWDER-BISCUITS
+11 oatmeal-breakfast
+
+# breakfast 13000 (7)
+28 bagel-breakfast
+8 Eggs-a-la-Tazah
+26 seven-grain-hot-cereal
+15 Creamed-Eggs
+10 Cheesy-spicy-grits
+23 EGGS-IN-A-NEST
+16 EGG-MCBAGELS
+5 BAKING-POWDER-BISCUITS
+13 oatmeal-breakfast
+
+# breakfast 12000 (10)
+26 bagel-breakfast
+7 Eggs-a-la-Tazah
+24 seven-grain-hot-cereal
+13 Creamed-Eggs
+9 Cheesy-spicy-grits
+21 EGGS-IN-A-NEST
+14 EGG-MCBAGELS
+4 BAKING-POWDER-BISCUITS
+12 oatmeal-breakfast
+
