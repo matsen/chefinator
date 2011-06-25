@@ -1,21 +1,21 @@
 let addToRefList l x = l := x::!l
 
-let list_floatSum = List.fold_left ( +. ) 0. 
+let list_floatSum = List.fold_left ( +. ) 0.
 
-let tidyString s = 
+let tidyString s =
   Pcre.replace ~pat:"^\\s*" ~templ:"" (
     Pcre.replace ~pat:"\\s*$" ~templ:"" s
   )
 
-let stringEq a b = ((String.compare a b) = 0) 
+let stringEq a b = ((String.compare a b) = 0)
 
-let round x = 
+let round x =
   if (x -. (floor x)) > 0.5 then
     1 + int_of_float (floor x)
   else
     int_of_float (floor x)
 
-let stringListToFile fname l = 
+let stringListToFile fname l =
   let ch = open_out fname in
   List.iter (
     fun s -> Printf.fprintf ch "%s\n" s
@@ -23,52 +23,52 @@ let stringListToFile fname l =
   close_out ch;
   ()
 
-let list_findUnique l = 
+let list_findUnique l =
   let h = Hashtbl.create (List.length l) in
   List.iter (
-    fun x -> 
+    fun x ->
       if not (Hashtbl.mem h x) then
         Hashtbl.add h x true
-  ) l; 
-  Hashtbl.fold (fun a b l -> a::l) h [] 
+  ) l;
+  Hashtbl.fold (fun a b l -> a::l) h []
 
   (* actually cuts out punctuation and plural *)
 let deplural = Pcre.replace ~pat:"s?[\\W,.:]*$" ~templ:""
 
-let firstWord s = 
+let firstWord s =
   let l = Pcre.split ~pat:"\\s" s in
   if List.length l <> 0 then List.hd l
   else ""
 
   (* skips comments *)
-let fileToList fname = 
+let fileToList fname =
   let lines = ref [] in
   let chIn = open_in fname in
-  try 
-    while true do 
+  try
+    while true do
       let line = input_line chIn in
       if not (Pcre.pmatch ~pat:"^#" line) then
         addToRefList lines line
     done;
     List.rev !lines
-  with 
+  with
   End_of_file -> (List.rev !lines)
 
-let tidyFileToList fname = 
+let tidyFileToList fname =
   List.map tidyString (fileToList fname)
 
   (* skips comments *)
-let fileToChunks fname = 
+let fileToChunks fname =
   let chunks = ref [] in
   let currChunk = ref [] in
   let chIn = open_in fname in
-  let hop () = 
+  let hop () =
     addToRefList chunks (List.rev !currChunk);
     currChunk := [];
     ()
   in
-  try 
-    while true do 
+  try
+    while true do
       let line = input_line chIn in
       if Pcre.pmatch ~pat:"^\\s*$" line then
         hop ()
@@ -76,13 +76,13 @@ let fileToChunks fname =
         addToRefList currChunk line;
     done;
     List.rev !chunks
-  with 
+  with
   End_of_file -> hop (); (List.rev !chunks)
 
-let tidyFileToChunks fname = 
+let tidyFileToChunks fname =
   List.map (List.map tidyString) (fileToChunks fname)
 
-let parseFraction s = 
+let parseFraction s =
   try (
     if Pcre.pmatch ~pat:"\\/" s then (
       let l = Pcre.split ~pat:"\\/" s in
@@ -96,10 +96,10 @@ let parseFraction s =
   with Exit -> failwith (s^" is not a well-formed fraction.")
 
   (* note binds the pair itself *)
-let pairsToHash l = 
+let pairsToHash l =
   let h = Hashtbl.create (List.length l) in
   List.iter (
-    fun a,b -> Hashtbl.add h a (a,b)
+    fun (a,b) -> Hashtbl.add h a (a,b)
   ) l;
   h
 
