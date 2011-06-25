@@ -3,38 +3,39 @@
 (*open Measurement;
 open ParseRecipe;*)
 (*let recipeFiles = ["test.txt"]*)
-let recipeFiles = ["simpleRecipes.txt"; "esther.txt"; "bryan.txt"; "erick.txt"]
-let calorieFile = "calorieCount.txt"
-let baseIngredFile = "baseIngreds.txt"
+let recipeFiles = ["data/simpleRecipes.txt"; "data/esther.txt";
+"data/bryan.txt"; "data/erick.txt"]
+let calorieFile = "data/calorieCount.txt"
+let baseIngredFile = "data/baseIngreds.txt"
 (*let menuPlanFile = "testPlan.txt"*)
-let menuPlanFile = "menuPlan.txt"
+let menuPlanFile = "data/menuPlan.txt"
 
-let init () = 
+let init () =
   let measHash = initializeMeasHash () in
   parseMeasurements measHash measNames;
   let calorieHash = calorieHashOfFile measHash calorieFile in
   let catBaseIngreds = tidyFileToChunks baseIngredFile in
-  let baseIngreds = 
+  let baseIngreds =
     dasgOfStringList (
       List.filter (fun x -> not (stringEq x "")) (
         List.flatten catBaseIngreds ) )
   in
   (*dasgPrint baseIngreds;*)
-  let recipes = 
-    List.map 
-      (parseRecipe measHash) 
+  let recipes =
+    List.map
+      (parseRecipe measHash)
       (List.flatten (List.map tidyFileToChunks recipeFiles)) in
   let recipeHash = pairsToHash recipes in
   measHash, calorieHash, baseIngreds, recipeHash
 
-let guessScale calorieHash needed recipe = 
+let guessScale calorieHash needed recipe =
   let cals = snd (calorifyRecipe calorieHash recipe) in
   let scale = needed /. cals in
   (*Printf.printf "%s: %f calories, if only %f\n" (fst recipe) cals scale;*)
   Printf.printf "%d %s\n" (round scale) (fst recipe);
   ()
 
-let checkRecipeLog ch calorieHash baseIngreds recipe = 
+let checkRecipeLog ch calorieHash baseIngreds recipe =
   Printf.fprintf ch "'%s'\n" (fst recipe);
   let cals = snd (calorifyRecipeLog ch calorieHash recipe) in
   (* the below actually does make sense, as eventually we want to get hashes for
@@ -45,32 +46,32 @@ let checkRecipeLog ch calorieHash baseIngreds recipe =
 
 let checkRecipe = checkRecipeLog stdout
 
-let checkRecipeFile measHash calorieHash baseIngreds fname = 
+let checkRecipeFile measHash calorieHash baseIngreds fname =
   let out = open_out (fname^".log") in
   List.iter (checkRecipeLog out calorieHash baseIngreds)
-    ( List.map 
-      (parseRecipe measHash) 
+    ( List.map
+      (parseRecipe measHash)
     (tidyFileToChunks fname) );
     close_out out;
     ()
 
-let checkMeal measHash calorieHash baseIngreds recipeHash s = 
-  let currCals = 
+let checkMeal measHash calorieHash baseIngreds recipeHash s =
+  let currCals =
     list_floatSum (
       List.map (
-        fun item -> 
+        fun item ->
           try
-            let a = 
-              Pcre.extract ~full_match:false ~pat:"([\\d\\.]*)\\s*(.*)" 
-                (tidyString item) 
+            let a =
+              Pcre.extract ~full_match:false ~pat:"([\\d\\.]*)\\s*(.*)"
+                (tidyString item)
             in
             let recipeName = tidyString a.(1) in
             if Hashtbl.mem recipeHash recipeName then
               let recipe = Hashtbl.find recipeHash recipeName in
               guessScale calorieHash 12000. recipe;
-              let cals = 
+              let cals =
                 snd (
-                  calorifyRecipe 
+                  calorifyRecipe
                     calorieHash
                     (scaleRecipe (float_of_string a.(0)) recipe) )
               in
@@ -80,28 +81,28 @@ let checkMeal measHash calorieHash baseIngreds recipeHash s =
               failwith ("unknown recipe: "^recipeName)
           with
           | Not_found -> failwith ("checkMeal couldn't make sense of "^item)
-      ) (Pcre.split ~pat:"\\s*:\\s*" s) ) 
+      ) (Pcre.split ~pat:"\\s*:\\s*" s) )
   in
   Printf.printf "total: %f\n\n" currCals;
   ()
 
-let check () = 
+let check () =
   let measHash, calorieHash, baseIngreds, recipeHash = init () in
-  List.iter 
+  List.iter
     (checkRecipeFile measHash calorieHash baseIngreds)
     recipeFiles
 
-let rock () = 
+let rock () =
   let measHash, calorieHash, baseIngreds, recipeHash = init () in
-  let (ingredToBase, baseToIngred) = 
+  let (ingredToBase, baseToIngred) =
     classifyAllRecipes
-      baseIngreds 
+      baseIngreds
       ( hashtbl_getVals recipeHash )
   in
-  let scaledRecipes = 
+  let scaledRecipes =
     scaleByMenuPlan recipeHash (menuPlanOfFile menuPlanFile) in
   let ch = open_out "chefinator.log" in
-  let shopList = 
+  let shopList =
     makeShopList ch ingredToBase (List.flatten scaledRecipes) in
   close_out ch;
   (* printShopList shopList; *)
@@ -111,7 +112,7 @@ let rock () =
   let ch = open_out "dayMenu.txt" in
   writeRecipeListCal ch calorieHash scaledRecipes;
   close_out ch;
-  (* now calc total calories *) 
+  (* now calc total calories *)
   calorifyRecipe calorieHash (
     "total calories: ",
     List.flatten (List.map snd (List.flatten scaledRecipes))

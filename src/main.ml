@@ -1,3 +1,6 @@
-open Pcre
-
-let _ = print_endline (quote "adsfd&")
+#require "pcre";;
+#use "src/base.ml";;
+#use "src/measurement.ml";;
+#use "src/recipe.ml";;
+#use "src/chefinator.ml";;
+rock ();;
