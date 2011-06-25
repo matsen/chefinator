@@ -1,3 +1,5 @@
+default: chefinator.native
+
 %.native %.byte %.p.native:
 	ocamlbuild $@
 

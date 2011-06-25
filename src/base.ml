@@ -30,7 +30,7 @@ let list_findUnique l =
       if not (Hashtbl.mem h x) then
         Hashtbl.add h x true
   ) l;
-  Hashtbl.fold (fun a b l -> a::l) h []
+  Hashtbl.fold (fun a _ l -> a::l) h []
 
   (* actually cuts out punctuation and plural *)
 let deplural = Pcre.replace ~pat:"s?[\\W,.:]*$" ~templ:""
@@ -103,8 +103,8 @@ let pairsToHash l =
   ) l;
   h
 
-let hashtbl_getKeys h = Hashtbl.fold (fun k v l -> k::l) h []
-let hashtbl_getVals h = Hashtbl.fold (fun k v l -> v::l) h []
+let hashtbl_getKeys h = Hashtbl.fold (fun k _ l -> k::l) h []
+let hashtbl_getVals h = Hashtbl.fold (fun _ v l -> v::l) h []
 
 let list_iteri f myList =
   let rec aux i = function

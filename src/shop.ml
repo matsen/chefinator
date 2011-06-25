@@ -1,27 +1,29 @@
-#use "calories.ml";;
-#use "dasg.ml";;
+open Base
+open Calories
+open Dasg
+open Measurement
 
-let ingredToWords s = 
+let ingredToWords s =
   Pcre.split ~pat:"\\s+" (
     Pcre.replace ~pat:"\\(.*\\)" ~templ:"" s )
 
 let killParen = Pcre.replace ~pat:"\\(.*\\)" ~templ:""
 
-let classifyIngred baseIngreds ingred = 
+let classifyIngred baseIngreds ingred =
   (* kill parenthetical statements *)
   let ingredEdit = killParen ingred in
   (* aux tries to match any of the keys of d to ingred, then recurs if found *)
   let rec aux biStr d =
     try
       dasgIter (
-        fun s dp -> 
+        fun s dp ->
           (* match the beginning of words only or things in dashed *)
-          if Pcre.pmatch ~pat:("\\s"^s) ingredEdit || 
+          if Pcre.pmatch ~pat:("\\s"^s) ingredEdit ||
              Pcre.pmatch ~pat:("^"^s) ingredEdit ||
-             Pcre.pmatch ~pat:("-"^s) ingredEdit 
+             Pcre.pmatch ~pat:("-"^s) ingredEdit
              then
             (* found something *)
-            let spaced = 
+            let spaced =
               biStr^(
                 if String.length biStr <> 0 then " "
                 else ""
@@ -32,20 +34,20 @@ let classifyIngred baseIngreds ingred =
       biStr
     with
     | Done(doneStr) -> doneStr
-  in 
+  in
   aux "" baseIngreds
 
-let getIngredList recipeList = 
-  List.flatten ( List.map ( fun (name, ingredList) -> ingredList ) recipeList )
+let getIngredList recipeList =
+  List.flatten ( List.map ( fun (_, ingredList) -> ingredList ) recipeList )
 
-let classifyAllRecipesGen verb ch baseIngreds recipeList = 
+let classifyAllRecipesGen verb ch baseIngreds recipeList =
   let ingredToBase = Hashtbl.create (5*(List.length recipeList)) in
   let baseToIngred = Hashtbl.create (5*(List.length recipeList)) in
   List.iter (
-    fun (meas, ingred) ->
+    fun (_, ingred) ->
       let base = classifyIngred baseIngreds (String.lowercase ingred) in
       if stringEq base "" then (
-        if verb then 
+        if verb then
           Printf.fprintf ch "** unclassified: '%s'\n" ingred;
       )
       else (
@@ -58,22 +60,22 @@ let classifyAllRecipesGen verb ch baseIngreds recipeList =
   ) (getIngredList recipeList);
   (ingredToBase, baseToIngred)
 
-let classifyAllRecipesLog = classifyAllRecipesGen true
-let classifyAllRecipesVerb = classifyAllRecipesLog stdout
-let classifyAllRecipes = classifyAllRecipesGen false stdout
+let classifyAllRecipesLog ch b r = classifyAllRecipesGen true ch b r
+let classifyAllRecipesVerb b r = classifyAllRecipesLog stdout b r
+let classifyAllRecipes b r = classifyAllRecipesGen false stdout b r
 
-let makeShopList ch ingredToBase recipeList = 
+let makeShopList ch ingredToBase recipeList =
   let shopList = Hashtbl.create (2 * (List.length recipeList)) in
   List.iter (
     fun (meas, ingred) ->
-      try 
+      try
         if Hashtbl.mem ingredToBase ingred then (
           (* this is a classified ingredient *)
           let baseIngred = Hashtbl.find ingredToBase ingred in
           if Hashtbl.mem shopList baseIngred then (
             let subtot, measList = Hashtbl.find shopList baseIngred in
             let newSubtot = measSum subtot meas in
-            Printf.fprintf ch 
+            Printf.fprintf ch
               "found '%s', increased quantity by %s to %s\n"
               baseIngred
               (measToString meas)
@@ -81,7 +83,7 @@ let makeShopList ch ingredToBase recipeList =
             Hashtbl.replace shopList baseIngred (newSubtot, measList @ [meas])
           )
           else (
-            Printf.fprintf ch 
+            Printf.fprintf ch
               "found '%s' which was new, now have %s\n"
               baseIngred
               (measToString meas);
@@ -93,16 +95,16 @@ let makeShopList ch ingredToBase recipeList =
             Printf.fprintf ch "unclassified: '%s'\n" ingred;
         )
       with
-      | Incompatible_classes -> 
+      | Incompatible_classes ->
           flush ch;
           print_endline ("incompatibility: "^ingred)
   ) (getIngredList recipeList);
   shopList
- 
-let writeShopList ch shopList = 
+
+let writeShopList ch shopList =
   Hashtbl.iter (
     fun item (meas, measList) ->
-      Printf.fprintf ch "%s  %s  (%s)\n" 
+      Printf.fprintf ch "%s  %s  (%s)\n"
       (measToString meas)
       item
       (String.concat ", " (List.map measToStringNoSpace measList))

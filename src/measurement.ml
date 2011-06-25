@@ -1,8 +1,8 @@
-#use "base.ml";;
+open Base
 
 exception Incompatible_classes
 
-type measurement =      Tsp of float | Tbsp of float | Cup of float | Quart of float | Gal of float | 
+type measurement =      Tsp of float | Tbsp of float | Cup of float | Quart of float | Gal of float |
                         Oz of float | Lb of float |
                         Generic of float | Unquant
 
@@ -16,7 +16,7 @@ let gal x = Gal x
 let oz x = Oz x
 let lb x = Lb x
 let generic x = Generic x
-let unquant x = Unquant 
+let unquant _ = Unquant
 
 let initializeMeasHash () = (
   let measHash = Hashtbl.create 10 in
@@ -32,7 +32,7 @@ let initializeMeasHash () = (
   measHash
 )
 
-let measToPair = function 
+let measToPair = function
   | Tsp(x)     -> "Tsp", x
   | Tbsp(x)    -> "Tbsp", x
   | Cup(x)     -> "Cup", x
@@ -43,7 +43,7 @@ let measToPair = function
   | Generic(x) -> "Generic", x
   | Unquant    -> "Unquant", 0. (* inelegant! *)
 
-let measNames = 
+let measNames =
   [
   "Tsp t tsp teaspoon";
   "Tbsp T tbsp tb tablespoon";
@@ -55,9 +55,9 @@ let measNames =
   "Generic generic";
   ]
 
-let measToString meas = 
+let measToString meas =
   let s, x =
-    match meas with 
+    match meas with
     | Tsp(x)     -> "Tsp", x
     | Tbsp(x)    -> "Tbs", x
     | Cup(x)     -> "Cup", x
@@ -71,8 +71,8 @@ let measToString meas =
   if x <> 0. then
     Printf.sprintf "%4.1f %s" x s
   else "        "
-  
-let measToStringNoSpace meas = 
+
+let measToStringNoSpace meas =
   tidyString (measToString meas)
 
   (* remove trailing s and period *)
@@ -84,13 +84,13 @@ let memMeas measHash measString =
 let findMeas measHash measString =
   Hashtbl.find measHash (procMeasString measString)
 
-let makeMeas measHash measString x = 
+let makeMeas measHash measString x =
   if memMeas measHash measString then
       (findMeas measHash measString) x
   else
     failwith (measString^" is not a known measurement.")
 
-let mapMeas measHash f meas = 
+let mapMeas measHash f meas =
   let (measString, x) = measToPair meas in
   makeMeas measHash measString (f x)
 
@@ -116,7 +116,7 @@ let parseMeasurements measHash measNames =
   ()
 
   (* this function scales everything to the smallest unit. *)
-let measToBase = function 
+let measToBase = function
   | Tsp(x)     -> EngVolume, 1. *. x
   | Tbsp(x)    -> EngVolume, 3. *. x
   | Cup(x)     -> EngVolume, 48. *. x
@@ -127,24 +127,24 @@ let measToBase = function
   | Generic(x) -> Other, 1. *. x
   | Unquant    -> Other, 0.
 
-let baseToMeas measClass x = 
+let baseToMeas measClass x =
   let rec measFold (x, currConstruct) = function
     | (convAmt, constructor)::l ->
         let newX = x /. convAmt in
         if newX >= 1. then
           measFold ( newX, constructor) l
-        else 
+        else
           currConstruct x
-    | [] -> 
+    | [] ->
         currConstruct x
   in
   match measClass with
-  | EngVolume -> 
-      measFold 
+  | EngVolume ->
+      measFold
         (x, tsp)
         [ 3., tbsp; 16., cup; 4., quart; 4., gal ]
-  | EngWeight -> 
-      measFold 
+  | EngWeight ->
+      measFold
         (x, oz)
         [ 16., lb; ]
   | Other ->
@@ -153,11 +153,11 @@ let baseToMeas measClass x =
       else
         Unquant
 
-let scaleMeas factor meas = 
+let scaleMeas factor meas =
   let (mClass, quant) = measToBase meas in
   baseToMeas mClass (quant *. factor)
 
-let measSum m1 m2 = 
+let measSum m1 m2 =
   let mClass1, x1 = measToBase m1 in
   let mClass2, x2 = measToBase m2 in
   if mClass1 = mClass2 then
@@ -165,7 +165,7 @@ let measSum m1 m2 =
   else
     raise Incompatible_classes
 
-let measRatio num denom = 
+let measRatio num denom =
   let numClass, numX = measToBase num in
   let denomClass, denomX = measToBase denom in
   if numClass = denomClass then

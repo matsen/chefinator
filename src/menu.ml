@@ -1,8 +1,10 @@
-#use "shop.ml";;
+open Shop
+open Base
+open Recipe
 
-let menuPlanOfFile mpFile = 
+let menuPlanOfFile mpFile =
   let ch = open_out (mpFile^".log") in
-  let mp = 
+  let mp =
     List.map (
       List.map (
         fun mealStr ->
@@ -12,24 +14,24 @@ let menuPlanOfFile mpFile =
           (float_of_string a.(0), a.(1))
       )
     ) (
-      List.map 
-      (Pcre.split ~pat:"\\s*:\\s*")  
+      List.map
+      (Pcre.split ~pat:"\\s*:\\s*")
       (tidyFileToList mpFile)
     )
   in
   close_out ch;
   mp
 
-let scaleByMenuPlan recipeHash menuPlan = 
+let scaleByMenuPlan recipeHash menuPlan =
   List.map (
     List.map (
       fun (scale, recipeName) ->
         let tidy = tidyString recipeName in
         if Hashtbl.mem recipeHash tidy then
-          scaleRecipe 
+          scaleRecipe
           scale
           (Hashtbl.find recipeHash tidy)
         else
           failwith ("unknown recipe: "^tidy)
-          ) 
+          )
   ) menuPlan

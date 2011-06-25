@@ -1,4 +1,9 @@
-#use "menu.ml";;
+open Menu
+open Measurement
+open Calories
+open Base
+open Shop
+open Recipe
 
 (*open Measurement;
 open ParseRecipe;*)
@@ -16,14 +21,14 @@ let init () =
   let calorieHash = calorieHashOfFile measHash calorieFile in
   let catBaseIngreds = tidyFileToChunks baseIngredFile in
   let baseIngreds =
-    dasgOfStringList (
+    Dasg.dasgOfStringList (
       List.filter (fun x -> not (stringEq x "")) (
         List.flatten catBaseIngreds ) )
   in
   (*dasgPrint baseIngreds;*)
   let recipes =
     List.map
-      (parseRecipe measHash)
+      (Recipe.parseRecipe measHash)
       (List.flatten (List.map tidyFileToChunks recipeFiles)) in
   let recipeHash = pairsToHash recipes in
   measHash, calorieHash, baseIngreds, recipeHash
@@ -55,7 +60,7 @@ let checkRecipeFile measHash calorieHash baseIngreds fname =
     close_out out;
     ()
 
-let checkMeal measHash calorieHash baseIngreds recipeHash s =
+let checkMeal calorieHash recipeHash s =
   let currCals =
     list_floatSum (
       List.map (
@@ -87,14 +92,14 @@ let checkMeal measHash calorieHash baseIngreds recipeHash s =
   ()
 
 let check () =
-  let measHash, calorieHash, baseIngreds, recipeHash = init () in
+  let measHash, calorieHash, baseIngreds, _ = init () in
   List.iter
     (checkRecipeFile measHash calorieHash baseIngreds)
     recipeFiles
 
 let rock () =
-  let measHash, calorieHash, baseIngreds, recipeHash = init () in
-  let (ingredToBase, baseToIngred) =
+  let _, calorieHash, baseIngreds, recipeHash = init () in
+  let (ingredToBase, _) =
     classifyAllRecipes
       baseIngreds
       ( hashtbl_getVals recipeHash )
@@ -117,3 +122,5 @@ let rock () =
     "total calories: ",
     List.flatten (List.map snd (List.flatten scaledRecipes))
   )
+
+let _ = rock ()

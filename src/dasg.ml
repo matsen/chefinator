@@ -24,12 +24,12 @@ let rec extendDasg d = function
   )
   | [] -> ()
 
-let printSpace n = 
+let printSpace n =
   for i=1 to n do print_string " " done
 
-let dasgPrint d = 
+let dasgPrint d =
   let rec aux tabLevel = function
-    | Dasg (h) -> 
+    | Dasg (h) ->
         List.iter (
           fun s ->
             let d = Hashtbl.find h s in
@@ -38,11 +38,11 @@ let dasgPrint d =
             aux (tabLevel+2) d;
         ) (
           List.sort compare (
-            Hashtbl.fold (fun k v l -> k::l) h [] ) )
+            Hashtbl.fold (fun k _ l -> k::l) h [] ) )
   in
   aux 0 d
 
-let dasgOfStringList sList = 
+let dasgOfStringList sList =
   let l = List.map (Pcre.split ~pat:"\\s+") sList in
   let d = dasgCreate (List.length l) in
   List.iter (extendDasg d) l;

@@ -1,5 +1,8 @@
-#use "recipe.ml";; 
-let calorieHashOfFile measHash fname = 
+open Base
+open Recipe
+open Measurement
+
+let calorieHashOfFile measHash fname =
   let calorieHash = Hashtbl.create 10 in
   List.iter (
     fun line ->
@@ -13,15 +16,15 @@ let calorieHashOfFile measHash fname =
   calorieHash
 
   (* we find the first word in the itemStr which is bound in calorieHash *)
-let findCaloric calorieHash itemStr = 
+let findCaloric calorieHash itemStr =
   (* aux finds the first string that exists in calorieHash *)
   let rec aux = function
     | item::l ->
         let dplItem = deplural (String.lowercase item) in
-        if Hashtbl.mem calorieHash dplItem then 
+        if Hashtbl.mem calorieHash dplItem then
           Some dplItem
         else aux l
-    | [] -> 
+    | [] ->
         None
   in
   aux (Pcre.split ~pat:"\\s" itemStr)
@@ -41,10 +44,10 @@ let calorifyRecipeGen verb ch calorieHash = function
                 );
                 subtot +. cals *. (measRatio meas calsMeas)
               with
-              | Incompatible_classes -> 
+              | Incompatible_classes ->
                   failwith (calStr^" and "^item^" are not compatible in "^name);
           )
-          | None -> 
+          | None ->
               if verb then Printf.fprintf ch "noncaloric: '%s'\n" item;
               subtot +. 0.
       ) 0. ingredList )
@@ -53,24 +56,24 @@ let calorifyRecipe = calorifyRecipeGen false stdout
 let calorifyRecipeLog = calorifyRecipeGen true
 let calorifyRecipeVerb = calorifyRecipeGen true
 
-let calorieScaleRecipe calorieHash desiredCalories recipe = 
-  scaleRecipe 
+let calorieScaleRecipe calorieHash desiredCalories recipe =
+  scaleRecipe
      (desiredCalories /. (snd (calorifyRecipe calorieHash recipe)))
      recipe
 
-let calorieHashToNames calorieHash = 
+let calorieHashToNames calorieHash =
   List.map (
-    Pcre.replace ~pat:"-" ~templ:" " 
-  ) (Hashtbl.fold (fun k v l -> k::l) calorieHash [])
+    Pcre.replace ~pat:"-" ~templ:" "
+  ) (Hashtbl.fold (fun k _ l -> k::l) calorieHash [])
 
-let writeRecipeListCal ch calorieHash = 
+let writeRecipeListCal ch calorieHash =
   list_iteri (
-    fun i l -> 
+    fun i l ->
       Printf.fprintf ch "\n# day %d\n" (i+1);
       List.iter (
         fun r ->
           writeRecipe ch r;
-          Printf.fprintf ch "%5.1f calories\n\n" 
+          Printf.fprintf ch "%5.1f calories\n\n"
           (snd (calorifyRecipe calorieHash r));
           ) l
   )

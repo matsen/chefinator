@@ -1,6 +1,5 @@
-#use "measurement.ml";;
-(*open Measurement;*)
-(*open ParseRecipe;*)
+open Measurement
+open Base
 
 
 let measHash = Hashtbl.create 10
@@ -32,7 +31,7 @@ let scaleRecipe quant = function
     List.map (scaleIngred quant) ingredList)
 
 let getRecipeName = function
-  name, ingreds -> name
+  name, _ -> name
 
 let writeRecipeNames infname outfname =
   let recipes = List.map (parseRecipe measHash) (tidyFileToChunks infname) in
