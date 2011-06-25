@@ -1,3 +1,3 @@
-<**/*.{byte,native,top,p.native}>: use_pcre
-<**/*.ml>: warn_Z, use_pcre
-<src>: include
+<**/*.{byte,native,top,p.native}>: use_pcre, use_str
+<**/*.ml>: warn_Z, use_pcre, use_str
+<*src>: include

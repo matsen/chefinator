@@ -5,21 +5,43 @@ open Base
 open Shop
 open Recipe
 
-(*open Measurement;
-open ParseRecipe;*)
-(*let recipeFiles = ["test.txt"]*)
-let recipeFiles = ["data/simpleRecipes.txt"; "data/esther.txt";
-"data/bryan.txt"; "data/erick.txt"]
-let calorieFile = "data/calorieCount.txt"
-let baseIngredFile = "data/baseIngreds.txt"
-(*let menuPlanFile = "testPlan.txt"*)
-let menuPlanFile = "data/menuPlan.txt"
+let json_fname = "/control.json"
 
-let init () =
+type control =
+  {
+    calorieFile: string;
+    baseIngredFile: string;
+    menuPlanFile: string;
+    recipeFiles: string list;
+  }
+
+let strl_of_json_arr ja =
+  List.map Simple_json.get_string ((Simple_json.get_array ja))
+
+let control_of_json fname =
+  let o = Json.of_file fname in
+  {
+    calorieFile = Simple_json.find_string o "calorieFile";
+    baseIngredFile = Simple_json.find_string o "baseIngredFile";
+    menuPlanFile = Simple_json.find_string o "menuPlanFile";
+    recipeFiles = strl_of_json_arr (Simple_json.find o "recipeFiles");
+  }
+
+let dirize_control dir ctl =
+  let dirize s = dir^"/"^s in
+  {
+    calorieFile = dirize ctl.calorieFile;
+    baseIngredFile = dirize ctl.baseIngredFile;
+    menuPlanFile = dirize ctl.menuPlanFile;
+    recipeFiles = List.map dirize ctl.recipeFiles;
+  }
+
+
+let init ctl =
   let measHash = initializeMeasHash () in
   parseMeasurements measHash measNames;
-  let calorieHash = calorieHashOfFile measHash calorieFile in
-  let catBaseIngreds = tidyFileToChunks baseIngredFile in
+  let calorieHash = calorieHashOfFile measHash ctl.calorieFile in
+  let catBaseIngreds = tidyFileToChunks ctl.baseIngredFile in
   let baseIngreds =
     Dasg.dasgOfStringList (
       List.filter (fun x -> not (stringEq x "")) (
@@ -29,7 +51,7 @@ let init () =
   let recipes =
     List.map
       (Recipe.parseRecipe measHash)
-      (List.flatten (List.map tidyFileToChunks recipeFiles)) in
+      (List.flatten (List.map tidyFileToChunks ctl.recipeFiles)) in
   let recipeHash = pairsToHash recipes in
   measHash, calorieHash, baseIngreds, recipeHash
 
@@ -91,21 +113,21 @@ let checkMeal calorieHash recipeHash s =
   Printf.printf "total: %f\n\n" currCals;
   ()
 
-let check () =
-  let measHash, calorieHash, baseIngreds, _ = init () in
+let check ctl =
+  let measHash, calorieHash, baseIngreds, _ = init ctl in
   List.iter
     (checkRecipeFile measHash calorieHash baseIngreds)
-    recipeFiles
+    ctl.recipeFiles
 
-let rock () =
-  let _, calorieHash, baseIngreds, recipeHash = init () in
+let rock ctl =
+  let _, calorieHash, baseIngreds, recipeHash = init ctl in
   let (ingredToBase, _) =
     classifyAllRecipes
       baseIngreds
       ( hashtbl_getVals recipeHash )
   in
   let scaledRecipes =
-    scaleByMenuPlan recipeHash (menuPlanOfFile menuPlanFile) in
+    scaleByMenuPlan recipeHash (menuPlanOfFile ctl.menuPlanFile) in
   let ch = open_out "chefinator.log" in
   let shopList =
     makeShopList ch ingredToBase (List.flatten scaledRecipes) in
@@ -123,4 +145,8 @@ let rock () =
     List.flatten (List.map snd (List.flatten scaledRecipes))
   )
 
-let _ = rock ()
+let dir = Sys.argv.(1)
+let ctl = dirize_control dir (control_of_json (dir^json_fname))
+
+let _ = check ctl
+let _ = rock ctl
