@@ -69,11 +69,17 @@ let calorieHashToNames calorieHash =
 let writeRecipeListCal ch calorieHash =
   list_iteri (
     fun i l ->
-      Printf.fprintf ch "\n# day %d\n" (i+1);
-      List.iter (
-        fun r ->
+      let calorie_list =
+        List.map
+          (fun r -> snd (calorifyRecipe calorieHash r))
+          l
+      in
+      Printf.fprintf ch "\n# day %d: %g calories\n"
+                        (i+1)
+                        (List.fold_left ( +. ) 0. calorie_list);
+      List.iter2 (
+        fun r c ->
           writeRecipe ch r;
-          Printf.fprintf ch "%5.1f calories\n\n"
-          (snd (calorifyRecipe calorieHash r));
-          ) l
+          Printf.fprintf ch "%5.1f calories\n\n" c;
+          ) l calorie_list
   )

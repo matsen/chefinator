@@ -1,7 +1,8 @@
 default: chefinator.native
+	./chefinator.native 2011
 
 %.native %.byte %.p.native:
-	ocamlbuild $@
+	ocamlbuild -use-ocamlfind $@
 
 clean:
 	ocamlbuild -clean
