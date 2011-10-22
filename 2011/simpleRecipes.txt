@@ -1,0 +1,26 @@
+supp-ham
+4oz can-ham
+
+can-chick
+4.5oz can-chicken
+
+supp-bb
+2oz bacon-bits
+
+supp-amaranth
+1/4c amaranth
+
+supp-gl
+8oz gimmelean
+
+cornbread
+2 oz cornbread-mix
+
+brownie
+2 oz brownie-mix
+
+cookie
+2 oz cookie
+
+supp-pita
+1 generic pita

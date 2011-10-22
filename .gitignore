@@ -3,3 +3,6 @@ trash.ml
 .toplevel_history
 _build
 chefinator.native
+*.log
+dayMenu.txt
+shoppingList.txt

@@ -1,0 +1,9 @@
+{
+  "baseIngredFile": "baseIngreds.txt",
+  "calorieFile": "calorieCount.txt",
+  "menuPlanFile": "menuPlan.txt",
+  "recipeFiles": [
+     "2011_recipes.txt",
+     "simpleRecipes.txt"
+    ]
+}
