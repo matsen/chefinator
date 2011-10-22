@@ -1,7 +1,7 @@
 # dinner
 1.5 BURRITOS : 4 cookie
 1.5 FETTUCINE_ALFREDO : 2 can-chick : 2 supp-gl : 4 cookie
-3 Coconut-curry-w-rice : 1 smores
+2.5 Coconut-curry-w-rice : 1 smores
 3 Quinoa-soup : 1 supp-gl : 2 supp-ham : 4 cookie
 2.5 Polenta : 2 supp-ham : 1 indian-bread-pudding
 2.5 Bryans-cheesy-pasta : 12 cookie
@@ -11,7 +11,7 @@
 2 Tortilla-soup : 10 quesadilla
 2 GRILLED_CHEESE_AND_TOMATO_SOUP : 2 supp-gl : 2 supp-ham : 2 indian-bread-pudding
 3.5 lentil-tomato-soup : 2 can-chick : 10 supp-pita
-4.5 kitchadi : 6 cookie : 2 supp-ham
+4 kitchadi : 6 cookie : 2 supp-ham
 # # breakfast 11000 (8)
 12 bagel-breakfast
 10 seven-grain-hot-cereal

@@ -1,4 +1,5 @@
 1 cup buckwheat-groat 479
+1 cup dry-black-bean 520
 1 cup rice 680
 1 cup cornmeal 442
 1 cup bulgur 479
@@ -39,7 +40,6 @@
 #
 9 oz can-kidney-bean 218
 8.47 oz can-black-bean 218
-9 oz can-fava-bean 182
 13.5 oz can-coconut-milk 770
 11 oz can-corn 210
 14.5 oz can-tomato 87
