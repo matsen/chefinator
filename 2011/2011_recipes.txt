@@ -41,7 +41,7 @@ EGGS-IN-A-NEST (another breakfast option)-- serves 1; combine with a high carb b
 EGG-MCBAGELS (serves 1 person in conjunction with some oatmeal or another high carb breakfast option)
 1 bagel
 1 egg
-3oz slice of cheese
+3oz cheese
 2 tsp butter
 
 BAKING-POWDER-BISCUITS (serves 3 people for a complete breakfast. Way faster and more filling than pancakes)
@@ -277,7 +277,7 @@ popcorn
 2 tbsp braggs
 
 smores
-1 graham-cracker-packet
+2 graham-cracker-packet
 2 hersheys-bar
 1/2 marshmallow-bag
 

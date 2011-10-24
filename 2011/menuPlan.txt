@@ -1,26 +1,26 @@
 # dinner
 2.5 Bryans-tomato-pasta : 4 supp-ham : 1 supp-gl : 1 smores
-1.5 BURRITOS : 4 cookie
-3 Quinoa-soup : 1 supp-gl : 2 supp-ham : 4 cookie
+1.5 BURRITOS : 8 cookie
+3 Quinoa-soup : 1 supp-gl : 2 supp-ham : 1 popcorn
 2.5 Coconut-curry-w-rice : 1 smores
 2 Tortilla-soup : 10 quesadilla
 2.5 Polenta : 2 supp-ham : 1 indian-bread-pudding
 3 Veggie-Chili : 3 supp-ham : 1 supp-gl : 1 tapioca-pudding
-2.5 Bryans-cheesy-pasta : 12 cookie
+2.5 Bryans-cheesy-pasta : 8 cookie
 3 lentil-tomato-soup : 2 can-chick : 10 supp-pita : 1 tapioca-pudding
-3.5 RISOTTO : 1 can-chick : 6 cookie
-4 kitchadi : 6 cookie : 2 supp-ham
-2 GRILLED_CHEESE_AND_TOMATO_SOUP : 1 supp-gl : 3 can-chick : 2 indian-bread-pudding
-1.5 BURRITOS : 4 cookie
-3 Quinoa-soup : 1 supp-gl : 2 supp-ham : 4 cookie
+3.5 RISOTTO : 1 can-chick : 1 smores
+4 kitchadi : 8 cookie : 2 supp-ham
+2 GRILLED_CHEESE_AND_TOMATO_SOUP : 1 supp-gl : 3 can-chick : 1 coleslaw : 2 indian-bread-pudding
+1.5 BURRITOS : 1 popcorn
+3 Quinoa-soup : 1 supp-gl : 2 supp-ham : 8 cookie
 2 Tortilla-soup : 10 quesadilla
 2.5 Coconut-curry-w-rice : 1 smores
 3 Veggie-Chili : 3 supp-ham : 1 supp-gl : 1 tapioca-pudding
-2.5 Bryans-cheesy-pasta : 12 cookie
+2.5 Bryans-cheesy-pasta : 10 cookie
 3 lentil-tomato-soup : 2 can-chick : 10 supp-pita : 1 tapioca-pudding
-3.5 RISOTTO : 1 can-chick : 6 cookie
-4 kitchadi : 6 cookie : 2 supp-ham
-# # breakfast 11000 (8)
+3.5 RISOTTO : 1 can-chick : 1 smores
+4 kitchadi : 10 cookie : 2 supp-ham
+# # breakfast
 12 bagel-breakfast
 10 seven-grain-hot-cereal
 10 EGG-MCBAGELS
