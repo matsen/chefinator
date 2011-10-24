@@ -63,6 +63,7 @@ rice arborio
 rice brown
 rice instant
 rice wild
+tapioca pearl
 tvp
 # dairy
 butter
