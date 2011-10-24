@@ -3,8 +3,10 @@ celery
 cilantro
 greens
 jalapeno
+leek
 onion red
 parsley
+shallots
 # condiments
 garlic paste
 ginger paste
@@ -14,17 +16,18 @@ salsa
 baking powder
 cookie
 cube boullion
+dry black beans
 honey
 jam
 juice lemon
 mix cornbread
 mix brownie
-mushrooms dried 
-nut pistachio 
+mushrooms dried
+nut pistachio
 oil coconut
-oil olive 
+oil olive
 oil veg
-pack alfredo 
+pack alfredo
 pack mexican
 raisin
 sugar
@@ -49,11 +52,11 @@ lentil dal mung
 millet
 oatmeal
 oats
-pasta fettucine 
+pasta fettucine
 pasta spirals
-pasta tortellini 
+pasta tortellini
 pearl barley
-polenta instant 
+polenta instant
 popcorn
 quinoa
 rice arborio
@@ -93,6 +96,7 @@ naan
 pita
 slice bread
 tortilla
+graham cracker packet
 # veg
 avocado
 bell pepper
@@ -129,3 +133,6 @@ pepper red
 pepper white
 salt
 yeast nutritional
+# dessert
+hersheys bar
+marshmallow bag

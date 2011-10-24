@@ -75,6 +75,6 @@
 2 oz gimmelean 60
 1 generic chicken-breast 400
 #
-1 generic packet-graham-cracker 531
+1 generic graham-cracker-packet 531
 1 generic hersheys-bar 600
-1 generic bag-marshmallow 900
+1 generic marshmallow-bag 900
