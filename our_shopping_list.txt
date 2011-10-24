@@ -2,13 +2,11 @@
  6.0      bay leaf  (3.0, 3.0)
  7.0      leek  (3.5, 3.5)
 10.0 Tbs  parsley  (2.0 Tbs, 3.0 Tbs, 2.0 Tbs, 3.0 Tbs)
- 1.5 Cup  flour  (3.8 Tbs, 3.8 Tbs, 8.0 Tbs, 8.0 Tbs)
- 3.2 Cup  oil veg  (9.6 Tbs, 1.0 Cup, 9.6 Tbs, 1.0 Cup)
 
 16.0      chili  (8.0, 8.0)
  1.5 Cup  indian spice  (12.0 Tbs, 12.0 Tbs)
  0.4 Tsp  cardamom ground  (0.1 Tsp, 0.2 Tsp)
- 4.2 Tbs  juice lemon  (1.7 Tbs, 2.5 Tbs)
+ 4.0 Tbs  chili powder  (2.0 Tbs, 2.0 Tbs)
 
  4.0 Tbs  nut  (2.0 Tbs, 2.0 Tbs)
  4.0 Tbs  cumin  (2.0 Tbs, 2.0 Tbs)
@@ -16,7 +14,6 @@
  1.9 Qt   butter  (2.0 Tbs, 4.0 Tbs, 1.2 Cup, 6.7 Tbs, 1.1 Cup, 6.7 Tbs, 1.1 Cup, 11.0 Tbs, 11.0 Tbs, 1.2 Cup, 6.7 Tbs)
  1.0 Tbs  garam masala  (1.5 Tsp, 1.5 Tsp)
 12.0 Tbs  jam  (12.0 Tbs)
- 4.0 Tbs  bragg  (2.0 Tbs, 2.0 Tbs)
  1.5 Tbs  vinegar white  (1.5 Tbs)
  4.0 Tbs  vinegar  (2.0 Tbs, 2.0 Tbs)
  7.8 Tbs  salt  (1.5 Tbs, 2.0 Tbs, 0.5 Tsp, 1.5 Tbs, 2.0 Tbs, 1.0 Tsp, 1.0 Tsp)
@@ -25,7 +22,21 @@
  5.8 Lb   veggies  (1.2 Lb, 1.9 Lb, 12.0 Oz, 1.9 Lb)
  6.5 Lb   cookie  (1.0 Lb, 1.0 Lb, 1.0 Lb, 1.0 Lb, 1.2 Lb, 1.2 Lb)
  3.2 Cup  oil  (12.0 Tbs, 2.0 Tbs, 4.0 Tbs, 2.0 Tbs, 12.0 Tbs, 4.0 Tbs, 8.0 Tbs, 8.0 Tbs)
+ 1.0      cabbage head  (1.0)
+
 
 13.3 Tbs  oil coconut  (6.7 Tbs, 6.7 Tbs)
 
  2.0 Tsp  dry  (2.0 Tsp)
+
+
+19.0      carrot  (3.0, 6.0, 1.0, 3.0, 6.0)
+18.0      zucchini  (3.0, 6.0, 3.0, 6.0)
+
+ 1.5 Cup  basil  (6.2 Tbs, 2.0 Tbs, 6.2 Tbs, 1.8 Tsp, 2.0 Tbs, 6.2 Tbs, 1.8 Tsp)
+
+109.0      egg  (3.0, 6.0, 10.0, 24.0, 10.0, 22.0, 24.0, 10.0)
+17.0      bell pepper  (2.0, 3.0, 3.5, 2.0, 3.0, 3.5)
+ 6.0      avocado  (3.0, 3.0)
+10.0 Tbs  curry powder  (5.0 Tbs, 5.0 Tbs)
+16.0      shallots  (8.0, 8.0)
